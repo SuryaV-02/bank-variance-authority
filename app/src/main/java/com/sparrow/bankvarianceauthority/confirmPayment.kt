@@ -23,6 +23,9 @@ class confirmPayment : AppCompatActivity() {
         btn_confirm.setOnClickListener {
             initiatePayment()
             val intent = Intent(this,paymentSuccessScreen::class.java)
+            intent.putExtra("donor",donor)
+            intent.putExtra("recipient",recipient)
+            intent.putExtra("amount",amount)
             startActivity(intent)
         }
 

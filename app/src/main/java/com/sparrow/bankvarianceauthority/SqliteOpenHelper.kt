@@ -12,6 +12,7 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
             val DATABASE_NAME = "bva.db"
             val DATABASE_VERSION= 1
             val TABLE_CUSTOMER= "customer"
+            val TABLE_HISTORY= "history"
 
             private val COLUMN_ID = "id_"
             private val COLUMN_USERNAME = "username"
@@ -23,6 +24,13 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
             private val COLUMN_EMAIL = "email"
             private val COLUMN_MOBILE = "mobile"
             private val COLUMN_ADDRESS = "address"
+
+            private val COLUMN_ID_ = "_id"
+            private val COLUMN_FROMUSER = "fromuser"
+            private val COLUMN_TOUSER = "touser"
+            private val COLUMN_DATE = "date"
+            private val COLUMN_AMOUNT = "amount"
+            private val COLUMN_STATUS = "status"
         }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -38,11 +46,25 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
                 "$COLUMN_MOBILE TEXT,"+
                 "$COLUMN_ADDRESS TEXT)")
         db?.execSQL(createCustomerTableCommand)
+
+        val createHistoryTableCommand =( "CREATE TABLE $TABLE_HISTORY (" +
+                "$COLUMN_ID_ INTEGER PRIMARY KEY,"+
+                "$COLUMN_FROMUSER TEXT,"+
+                "$COLUMN_TOUSER TEXT,"+
+                "$COLUMN_DATE TEXT," +
+                "$COLUMN_AMOUNT TEXT," +
+                "$COLUMN_STATUS TEXT)")
+        db?.execSQL(createHistoryTableCommand)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         val upgradeCustomerTableCommand =("DROP TABLE IF EXISTS $TABLE_CUSTOMER")
+        val upgradeHistoryTableCommand =("DROP TABLE IF EXISTS $TABLE_HISTORY")
         db?.execSQL(upgradeCustomerTableCommand)
+        db?.execSQL(upgradeHistoryTableCommand)
+
+        onCreate(db)
     }
 
     fun addCustomerData(username : String?,
@@ -69,6 +91,21 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
         values.put(COLUMN_ADDRESS,address)
         db.insert(TABLE_CUSTOMER,null,values)
         Log.i("SKHST_DB","Insertion COMMAND success @addCustomerData")
+        db.close()
+    }
+
+    fun addHistoryData(fromUser:String,toUSer:String,date:String,amount:String,status:String){
+
+        val values = ContentValues()
+        val db = this.writableDatabase
+
+        values.put(COLUMN_FROMUSER,fromUser)
+        values.put(COLUMN_TOUSER,toUSer)
+        values.put(COLUMN_DATE,date)
+        values.put(COLUMN_AMOUNT,amount)
+        values.put(COLUMN_STATUS,status)
+        db.insert(TABLE_HISTORY,null,values)
+        Log.i("SKHST_DB","Insertion COMMAND success @addHistoryData")
         db.close()
     }
 
@@ -110,7 +147,31 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
                 customersList.add(tempObj)
             }
         }
+        cursor.close()
         return customersList
+    }
+    fun getHistoryData() : ArrayList<HistoryData>{
+        var HistoryList  = ArrayList<HistoryData>()
+        var fromUser: String
+        var toUSer: String
+        var date: String
+        var amount: String
+        var status: String
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_HISTORY",null)
+        while (cursor.moveToNext()){
+            fromUser = cursor.getString(cursor.getColumnIndex(COLUMN_FROMUSER))
+            toUSer = cursor.getString(cursor.getColumnIndex(COLUMN_TOUSER))
+            date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
+            amount = cursor.getString(cursor.getColumnIndex(COLUMN_AMOUNT))
+            status = cursor.getString(cursor.getColumnIndex(COLUMN_STATUS))
+
+            val tempObj = HistoryData(fromUser,toUSer, date, amount, status)
+            HistoryList.add(tempObj)
+        }
+        cursor.close()
+        return HistoryList
     }
 
     fun getUser(uid : String) : Customer{
@@ -150,6 +211,7 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
                 email,
                 mobile,
                 address)
+        cursor.close()
         return tempObj
         }
 
