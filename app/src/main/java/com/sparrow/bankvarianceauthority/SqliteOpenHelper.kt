@@ -171,6 +171,11 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
             HistoryList.add(tempObj)
         }
         cursor.close()
+        try{
+            HistoryList = HistoryList.reversed() as ArrayList<HistoryData>
+        }catch (e : Exception){
+            Log.e("SKHST_DB_4568746","Failed to reverse HistoryList")
+        }
         return HistoryList
     }
 

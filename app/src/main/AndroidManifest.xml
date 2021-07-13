@@ -9,7 +9,9 @@
         android:roundIcon="@drawable/icon_minified"
         android:supportsRtl="true"
         android:theme="@style/Theme.BankVarianceAuthority">
-        <activity android:name=".paymentSuccessScreen"></activity>
+        <activity android:name=".HistoryScreen"></activity>
+        <activity android:name=".HomeScreen" />
+        <activity android:name=".paymentSuccessScreen" />
         <activity android:name=".testActivity" />
         <activity android:name=".confirmPayment" />
         <activity android:name=".paymentScreen" />

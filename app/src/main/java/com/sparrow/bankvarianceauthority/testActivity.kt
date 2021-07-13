@@ -13,13 +13,13 @@ class testActivity : AppCompatActivity() {
 
     private fun addAndCheckHistoryData() {
         val dbHelper = SqliteOpenHelper(this,null)
-        dbHelper.addHistoryData("Vinayagar","Murugar",
-            "26 AUG 2022","$23.8","SUCCESS")
-        dbHelper.addHistoryData("Sri","Temple",
-            "18 MAY 2012","$85.3","FAILED")
+//        dbHelper.addHistoryData("Vinayagar","Murugar",
+//            "26 AUG 2022","$23.8","SUCCESS")
+//        dbHelper.addHistoryData("Sri","Temple",
+//            "18 MAY 2012","$85.3","FAILED")
 
         val skhstList  = dbHelper.getHistoryData()
-        Log.i("SKHST154783","${skhstList.size}")
+        Log.i("SKHST154783@TESTACT","${skhstList.size}")
 
 
     }

@@ -23,6 +23,7 @@ class confirmPayment : AppCompatActivity() {
         btn_confirm.setOnClickListener {
             initiatePayment()
             val intent = Intent(this,paymentSuccessScreen::class.java)
+            intent.putExtra("status",true)
             intent.putExtra("donor",donor)
             intent.putExtra("recipient",recipient)
             intent.putExtra("amount",amount)
@@ -33,6 +34,9 @@ class confirmPayment : AppCompatActivity() {
         btn_cancel.setOnClickListener {
             val intent = Intent(this,paymentSuccessScreen::class.java)
             intent.putExtra("status",false)
+            intent.putExtra("donor",donor)
+            intent.putExtra("recipient",recipient)
+            intent.putExtra("amount",amount)
             startActivity(intent)
         }
 

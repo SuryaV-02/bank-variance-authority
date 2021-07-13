@@ -18,9 +18,12 @@ class MainActivity : AppCompatActivity() {
         checkAndAddUsersToDB()
         val ibtn_home_next = findViewById<Button>(R.id.btn_home_next)
         ibtn_home_next.setOnClickListener {
-            val intent = Intent(this,testActivity::class.java)
+            val intent = Intent(this,HomeScreen::class.java)
             startActivity(intent)
         }
+        val dbHelper = SqliteOpenHelper(this,null)
+        val skhstList  = dbHelper.getHistoryData()
+        Log.i("SKHST154783@MAINACT","${skhstList.size}")
     }
     private fun checkAndAddUsersToDB() {
         val dbHelper = SqliteOpenHelper(this,null)
