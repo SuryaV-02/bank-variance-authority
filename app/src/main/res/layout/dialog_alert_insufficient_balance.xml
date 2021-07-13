@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingHorizontal="30dp"
+    android:paddingVertical="15dp"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alert"
+        android:textSize="30sp"
+        android:textColor="@color/color_txt"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Insufficient balance in account"
+        android:textSize="15sp"
+        android:layout_marginVertical="5dp"
+        android:textColor="@color/color_txt"
+        android:gravity="center"
+        />
+    <Button
+        android:id="@+id/btn_ok_dia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_bg"
+        android:layout_marginTop="15dp"
+        android:text="Okay"
+        />
+
+</LinearLayout>

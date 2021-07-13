@@ -1,0 +1,2 @@
+rootProject.name = "Bank Variance Authority"
+include ':app'
