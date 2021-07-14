@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val ibtn_home_next = findViewById<Button>(R.id.btn_home_next)
         ibtn_home_next.setOnClickListener {
             val intent = Intent(this,HomeScreen::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
         val dbHelper = SqliteOpenHelper(this,null)

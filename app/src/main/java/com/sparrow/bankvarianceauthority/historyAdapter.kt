@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -40,11 +43,20 @@ class historyAdapter(val context : Context, val items : ArrayList<HistoryData>):
         }else{
             holder.iv_status.setImageResource(R.drawable.blue_check)
         }
-
-
         holder.tv_date.text = items[position].date
         holder.tv_fromName.text = items[position].fromUser
         holder.tv_toName.text = items[position].toUSer
         holder.tv_amount.text = items[position].amount
+
+        //val anim = AnimationUtils.loadAnimation(context,R.anim.fade_in_anim)
+        //holder.itemView.startAnimation(anim)
+        setFadeAnimation(holder.itemView)
+
+    }
+
+    fun setFadeAnimation(view : View){
+        val anim = AlphaAnimation(0.0f,1.0f)
+        anim.duration = 1000
+        view.startAnimation(anim)
     }
 }
