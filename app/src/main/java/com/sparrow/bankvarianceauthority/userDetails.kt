@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import kotlin.math.roundToInt
 
 class userDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class userDetails : AppCompatActivity() {
         tv_userName.text = currentUser.userName
         tv_about.text = currentUser.about
         tv_uid.text = currentUser.UID
-        tv_balance.text = currentUser.balance.toString()
+        tv_balance.text = String.format("%.2f", currentUser.balance)
         tv_email.text = currentUser.email
         tv_mobile.text = currentUser.mobile
         tv_address.text = currentUser.address
