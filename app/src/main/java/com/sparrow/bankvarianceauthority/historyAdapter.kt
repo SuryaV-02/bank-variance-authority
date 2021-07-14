@@ -46,7 +46,7 @@ class historyAdapter(val context : Context, val items : ArrayList<HistoryData>):
         holder.tv_date.text = items[position].date
         holder.tv_fromName.text = items[position].fromUser
         holder.tv_toName.text = items[position].toUSer
-        holder.tv_amount.text = items[position].amount
+        holder.tv_amount.text = "$" + items[position].amount
 
         //val anim = AnimationUtils.loadAnimation(context,R.anim.fade_in_anim)
         //holder.itemView.startAnimation(anim)

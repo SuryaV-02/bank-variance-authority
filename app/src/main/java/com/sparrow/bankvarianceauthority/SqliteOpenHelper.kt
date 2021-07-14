@@ -150,6 +150,7 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
         cursor.close()
         return customersList
     }
+
     fun getHistoryData() : ArrayList<HistoryData>{
         var HistoryList  = ArrayList<HistoryData>()
         var fromUser: String
@@ -219,6 +220,37 @@ class SqliteOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
         cursor.close()
         return tempObj
         }
+
+    fun getIndividualHistoryData(uName : String) : ArrayList<HistoryData>{
+        var HistoryList  = ArrayList<HistoryData>()
+        var fromUser: String
+        var toUSer: String
+        var date: String
+        var amount: String
+        var status: String
+
+        val id = "\"$uName\""
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_HISTORY WHERE $COLUMN_FROMUSER = $id",null)
+        while (cursor.moveToNext()){
+            fromUser = cursor.getString(cursor.getColumnIndex(COLUMN_FROMUSER))
+            toUSer = cursor.getString(cursor.getColumnIndex(COLUMN_TOUSER))
+            date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
+            amount = cursor.getString(cursor.getColumnIndex(COLUMN_AMOUNT))
+            status = cursor.getString(cursor.getColumnIndex(COLUMN_STATUS))
+
+            val tempObj = HistoryData(fromUser,toUSer, date, amount, status)
+            HistoryList.add(tempObj)
+        }
+        cursor.close()
+        try{
+            HistoryList = HistoryList.reversed() as ArrayList<HistoryData>
+        }catch (e : Exception){
+            Log.e("SKHST_DB_4568746","Failed to reverse HistoryList")
+        }
+        return HistoryList
+    }
 
     fun setUserBalance(uid : String , amount : String){
         val db = this.writableDatabase

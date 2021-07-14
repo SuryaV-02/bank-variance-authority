@@ -6,25 +6,26 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 
-class HistoryScreen : AppCompatActivity() {
+class individualHistoryScreen : AppCompatActivity() {
+    var fromUser : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_history_screen)
+        setContentView(R.layout.activity_individual_history_screen)
+        fromUser = intent.getStringExtra("fromUser")
         setUpHistoryView()
-
-        val btn_back =findViewById<ImageView>(R.id.btn_back)
+        val btn_back = findViewById<ImageView>(R.id.btn_back)
         btn_back.setOnClickListener {
             onBackPressed()
         }
     }
+
     private fun setUpHistoryView() {
         val tv_noPrevTrans = findViewById<TextView>(R.id.tv_noPrevTrans)
-        val rv_history_screen = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rv_history_screen)
+        val rv_history_screen = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rv_individual_history_screen)
         val dbHelper = SqliteOpenHelper(this,null)
-        val historyList  = dbHelper.getHistoryData()
+        val historyList  = dbHelper.getIndividualHistoryData(fromUser!!)
         if(historyList.size==0){
             rv_history_screen.visibility = View.INVISIBLE
             tv_noPrevTrans.visibility = View.VISIBLE

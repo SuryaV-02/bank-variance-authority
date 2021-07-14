@@ -68,7 +68,6 @@
         </LinearLayout>
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/tv_noPrevTrans"
         android:layout_width="wrap_content"
@@ -84,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_history_screen"
+        android:id="@+id/rv_individual_history_screen"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layoutAnimation="@anim/item_layout_animation"

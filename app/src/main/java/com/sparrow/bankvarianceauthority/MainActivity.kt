@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         checkAndAddUsersToDB()
-        val ibtn_home_next = findViewById<Button>(R.id.btn_home_next)
+        val ibtn_home_next = findViewById<ImageView>(R.id.ibtn_home_next)
         ibtn_home_next.setOnClickListener {
             val intent = Intent(this,HomeScreen::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         uid = UUID.randomUUID()
         dbHelper.addCustomerData(
             "David Bose",
-            "CEO at google",
+            "Professional Photographer",
             DbBitmapUtility.getBytes(profileImage),
             DbBitmapUtility.getBytes(profileAvatar),
             "$uid",
@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         uid = UUID.randomUUID()
         dbHelper.addCustomerData(
             "Jenny red",
-            "Proessional photographer",
+            "Employee at google",
             DbBitmapUtility.getBytes(profileImage),
             DbBitmapUtility.getBytes(profileAvatar),
             "$uid",

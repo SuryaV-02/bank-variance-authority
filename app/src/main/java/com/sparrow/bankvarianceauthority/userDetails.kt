@@ -27,6 +27,7 @@ class userDetails : AppCompatActivity() {
         val iv_profileImage = findViewById<ImageView>(R.id.iv_profileImage)
         val iv_profileAvatar = findViewById<ImageView>(R.id.iv_profileAvatar)
         val btn_transferAmount = findViewById<Button>(R.id.btn_transferAmount)
+        val btn_viewHistory = findViewById<Button>(R.id.btn_viewHistory)
         val btn_back = findViewById<ImageView>(R.id.btn_back)
 
 
@@ -48,6 +49,11 @@ class userDetails : AppCompatActivity() {
         btn_transferAmount.setOnClickListener {
             val intent = Intent(this,recipientUserScreen::class.java)
             intent.putExtra("UUID","${currentUser.UID}")
+            startActivity(intent)
+        }
+        btn_viewHistory.setOnClickListener {
+            val intent = Intent(this,individualHistoryScreen::class.java)
+            intent.putExtra("fromUser","${currentUser.userName}")
             startActivity(intent)
         }
 
