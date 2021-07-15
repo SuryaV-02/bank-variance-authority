@@ -35,7 +35,7 @@ class userDetails : AppCompatActivity() {
         tv_userName.text = currentUser.userName
         tv_about.text = currentUser.about
         tv_uid.text = currentUser.UID
-        tv_balance.text = String.format("%.2f", currentUser.balance)
+        tv_balance.text ="$"+String.format("%.2f", currentUser.balance)
         tv_email.text = currentUser.email
         tv_mobile.text = currentUser.mobile
         tv_address.text = currentUser.address
